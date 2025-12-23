@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block section %}
+
+<div class="container py-5">
+  <h2 class="text-center mb-4" style="color:#e50914;">Choose Your Plan</h2>
+  <div class="row g-4">
+
+    <!-- Basic Plan -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:1px solid #2a2a2a; color:#fff;">
+        <div class="card-body">
+          <h5 class="card-title" style="color:#e50914;">Basic Plan</h5>
+          <h3 style="margin:10px 0;">₹199/month</h3>
+          <p class="card-text">Good for mobile viewing</p>
+          <ul class="list-unstyled text-start" style="font-size:14px;">
+            <li>✔ Phone/Tablet only</li>
+            <li>✔ 480p quality</li>
+            <li>✔ 1 screen at a time</li>
+            <li>✔ Download on 1 device</li>
+          </ul>
+          <a href="#" class="btn btn-outline-light">More details</a>
+          <a href="#" class="btn btn-danger ms-2">Get Basic</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard Plan -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:2px solid #e50914; color:#fff;">
+        <div class="card-body">
+          <span class="badge bg-danger mb-2">Popular</span>
+          <h5 class="card-title" style="color:#e50914;">Standard Plan</h5>
+          <h3 style="margin:10px 0;">₹499/month</h3>
+          <p class="card-text">Balanced features for most people</p>
+          <ul class="list-unstyled text-start" style="font-size:14px;">
+            <li>✔ TV, Laptop, Phone</li>
+            <li>✔ 1080p Full HD</li>
+            <li>✔ 2 screens at a time</li>
+            <li>✔ Downloads on 2 devices</li>
+            <li>✔ Ad‑free experience</li>
+          </ul>
+          <a href="#" class="btn btn-outline-light">More details</a>
+          <a href="#" class="btn btn-danger ms-2">Get Standard</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:1px solid #2a2a2a; color:#fff;">
+        <div class="card-body">
+          <h5 class="card-title" style="color:#e50914;">Premium Plan</h5>
+          <h3 style="margin:10px 0;">₹699/month</h3>
+          <p class="card-text">Best picture and more devices</p>
+          <ul class="list-unstyled text-start" style="font-size:14px;">
+            <li>✔ All devices supported</li>
+            <li>✔ 4K + HDR quality</li>
+            <li>✔ 4 screens at a time</li>
+            <li>✔ Downloads on 4 devices</li>
+            <li>✔ Spatial audio</li>
+          </ul>
+          <a href="#" class="btn btn-outline-light">More details</a>
+          <a href="#" class="btn btn-danger ms-2">Get Premium</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock %}
