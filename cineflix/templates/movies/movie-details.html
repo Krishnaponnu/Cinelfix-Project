@@ -24,7 +24,7 @@
       </p>
 
       <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-white text-dark rounded-pill" style="width: 150px;"><i class="fa-solid fa-play me-2"></i>Play</button>
+        <a href="{% url 'movie-play' movie.uuid %}" class="btn bg-white text-dark rounded-pill" style="width: 150px;"><i class="fa-solid fa-play me-2"></i>Play</a>
         <button class="btn bg-dark btn-outline-light rounded-pill" style="width: 150px;"><i class="fa-solid fa-plus me-2"></i>My List</button>
         
       </div>
@@ -32,6 +32,52 @@
       <p><strong>Starring:</strong> {% for artist in movie.artist.all %} {{artist.name}} {% endfor %}</p>
       <p><strong>Genres:</strong> {% for gen in movie.genre.all %} {{gen.name}} {% endfor %} </p>
       <p><strong>Available in :</strong>{% for language in movie.languages.all %} {{language.name}} {% endfor %} </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="section-header align-center">
+	          <h2 class="section-title">You May Also Like...</h2>
+					</div>
+
+					<div class="product-list">
+						<div class="row">
+							              {% for movie in recomended_movies %}
+							<div class="col-md-3">
+								<div class="product-item">
+									<figure class="product-style">
+										<img src="{{ movie.photo.url }}" alt="Books" class="product-item" style="height: 400px;">
+										<a href="{% url 'movie-details' movie.uuid %}">
+										<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Watch</button></a>
+									</figure>
+									<figcaption>
+										<h3>{{ movie.name }}</h3>
+										<span>
+                                            <ul style="display: flex; list-style: none; justify-content: center;">
+                                                <li class="mx-4">{{ movie.release_date | date:'Y'}}</li>
+												{% display_time movie.runtime as runtime %}
+                                                <li class="mx-4">{{ runtime }}</li>
+                                                <li class="mx-4">{{ movie.certification}}</li>
+                                            </ul>
+                                        </span>
+										<div class="item-price text-truncate">{{ movie.description }}</div>
+									</figcaption>
+								</div>
+							</div>
+							{% endfor %}
+
+
+
+
+						</div><!--ft-books-slider-->
+					</div><!--grid-->
+
+        </div>
+      </div>
     </div>
   </section>
 

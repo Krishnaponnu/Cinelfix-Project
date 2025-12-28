@@ -17,4 +17,6 @@ urlpatterns = [
     path('movie-edit/<str:uuid>/',views.MovieEditView.as_view(),name='movie-edit'),
 
     path('movie-delete/<str:uuid>/',views.MovieDeleteView.as_view(),name='movie-delete'),
+
+    path('movie-play/<str:uuid>/',views.PlayMovie.as_view(),name='movie-play'),
 ]

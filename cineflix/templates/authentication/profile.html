@@ -21,6 +21,20 @@
       <div class="col-md-4 fw-bold">Phone Number:</div>
       <div class="col-md-8">{% if user.phone and user.phone_verified %} {{user.phone}} {% else %}<span class="mx-4"><a href="{% url 'addphone' %}"><i class="fa fa-plus"></i>Add</a></span>{% endif %}</div>
     </div>
+    {% active_subscription_plan request as active_plan %}
+    {% if active_plan %}
+
+    <div class="row mb-3">
+      <div class="col-md-4 fw-bold">Plan:</div>
+      <div class="col-md-8">{{active_plan.plan.name}}</div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4 fw-bold">Expiring On:</div>
+      <div class="col-md-8">{{active_plan.end_date | date:'d-m-Y'}}</div>
+    </div>
+    {% endif %}
+
   </div>
 </section>
 

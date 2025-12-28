@@ -7,67 +7,72 @@
   <div class="row g-4">
 
     <!-- Basic Plan -->
+    {% for plan in plans %}
     <div class="col-md-4">
-      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:1px solid #2a2a2a; color:#fff;">
+      <div class="card h-100 text-center plan-card" onclick="highlightCard(this)" style="background-color:#1a1a1a; border:1px solid #2a2a2a; color:#fff;">
         <div class="card-body">
-          <h5 class="card-title" style="color:#e50914;">Basic Plan</h5>
-          <h3 style="margin:10px 0;">₹199/month</h3>
-          <p class="card-text">Good for mobile viewing</p>
+          <h5 class="card-title" style="color:#e50914;">{{plan.name}}</h5>
+          <h3 style="margin:10px 0;">₹{{plan.amount}}/month</h3>
           <ul class="list-unstyled text-start" style="font-size:14px;">
-            <li>✔ Phone/Tablet only</li>
-            <li>✔ 480p quality</li>
-            <li>✔ 1 screen at a time</li>
-            <li>✔ Download on 1 device</li>
+            <li>✔ {% for device in plan.devices %}<span class="me-3">{{device}}</span> {% endfor %}</li>
+            <li>✔ {{plan.quality}} quality</li>
+            <li>✔ {{plan.no_of_screens}} screen at a time</li>
+            <li>✔ Download on {{plan.download_devices}} device</li>
           </ul>
-          <a href="#" class="btn btn-outline-light">More details</a>
-          <a href="#" class="btn btn-danger ms-2">Get Basic</a>
+          <a href="#" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#planModal{{plan.id}}">Get {{plan.name}}</a>
         </div>
       </div>
     </div>
 
-    <!-- Standard Plan -->
-    <div class="col-md-4">
-      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:2px solid #e50914; color:#fff;">
-        <div class="card-body">
-          <span class="badge bg-danger mb-2">Popular</span>
-          <h5 class="card-title" style="color:#e50914;">Standard Plan</h5>
-          <h3 style="margin:10px 0;">₹499/month</h3>
-          <p class="card-text">Balanced features for most people</p>
-          <ul class="list-unstyled text-start" style="font-size:14px;">
-            <li>✔ TV, Laptop, Phone</li>
-            <li>✔ 1080p Full HD</li>
-            <li>✔ 2 screens at a time</li>
-            <li>✔ Downloads on 2 devices</li>
-            <li>✔ Ad‑free experience</li>
-          </ul>
-          <a href="#" class="btn btn-outline-light">More details</a>
-          <a href="#" class="btn btn-danger ms-2">Get Standard</a>
-        </div>
+    <div class="modal fade" id="planModal{{plan.id}}" tabindex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="planModalLabel">Confirm Your Plan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>
-
-    <!-- Premium Plan -->
-    <div class="col-md-4">
-      <div class="card h-100 text-center" style="background-color:#1a1a1a; border:1px solid #2a2a2a; color:#fff;">
-        <div class="card-body">
-          <h5 class="card-title" style="color:#e50914;">Premium Plan</h5>
-          <h3 style="margin:10px 0;">₹699/month</h3>
-          <p class="card-text">Best picture and more devices</p>
-          <ul class="list-unstyled text-start" style="font-size:14px;">
-            <li>✔ All devices supported</li>
-            <li>✔ 4K + HDR quality</li>
-            <li>✔ 4 screens at a time</li>
-            <li>✔ Downloads on 4 devices</li>
-            <li>✔ Spatial audio</li>
-          </ul>
-          <a href="#" class="btn btn-outline-light">More details</a>
-          <a href="#" class="btn btn-danger ms-2">Get Premium</a>
-        </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <h6>Plan Details</h6>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Plan Name <span class="fw-bold">{{plan.name}}</span>
+          </li>
+          
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Amount <span class="fw-bold">₹{{plan.amount}}/month</span>
+          </li>
+        </ul>
+        <p class="text-muted">Please confirm your subscription plan before proceeding with payment.</p>
       </div>
+      
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'razorpay' plan.uuid %}"><button type="button" class="btn btn-success">Pay Now</button></a>
+      </div>
+      
     </div>
+  </div>
+</div>
+    {% endfor %}
 
   </div>
 </div>
 
+
+<script>
+function highlightCard(selectedCard) {
+  // Reset all cards
+  document.querySelectorAll('.plan-card').forEach(card => {
+    card.style.border = "1px solid #2a2a2a";
+  });
+  // Highlight the clicked card
+  selectedCard.style.border = "2px solid #e50914";
+}
+</script>
 
 {% endblock %}

@@ -16,7 +16,7 @@ class Profile(AbstractUser):
 
     role = models.CharField(max_length=10,choices=RoleChoices.choices)
 
-    phone = models.CharField(null=True,blank=True)
+    phone = models.CharField(max_length=13,null=True,blank=True)
 
     phone_verified = models.BooleanField(default=False)
 

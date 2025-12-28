@@ -155,7 +155,7 @@ class Movie(BaseClass):
 
     runtime=models.TimeField()
 
-    certification=models.CharField(choices=CertificationChoices.choices)  
+    certification=models.CharField(max_length=10)  
 
     genre=models.ManyToManyField('Genre')
 
