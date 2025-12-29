@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 
 from authentication.permissions import permitted_user_roles
 
-from cineflix.utils import get_recommended_movies
+#from cineflix.utils import get_recommended_movies
 
 from subscriptions.models import UserSubscriptions
 
@@ -183,9 +183,9 @@ class MovieDetailsView(View):
 
         movie = Movie.objects.get(uuid=uuid)
 
-        recommended_movies = get_recommended_movies(movie)
+        #recommended_movies = get_recommended_movies(movie)
 
-        data = {'movie':movie,'page':movie.name,'recommended_movies':recommended_movies}
+        data = {'movie':movie,'page':movie.name}
         
         return render(request,self.template,context=data)
     

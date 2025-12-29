@@ -12,11 +12,11 @@ from django.core.mail import EmailMultiAlternatives
 
 from movies.models import Movie
 
-import pandas as pd
+# import pandas as pd
 
-from sklearn.metrics.pairwise import cosine_similarity
+# from sklearn.metrics.pairwise import cosine_similarity
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 
 def generate_password():
 
@@ -56,41 +56,41 @@ def send_email(recipient,template,subject,context):
     msg.send()
 
 
-def get_recommended_movies(movie):
+# def get_recommended_movies(movie):
 
-    data = pd.DataFrame(Movie.objects.all().values('id','name', 'description','industry__name','certification','genre__name','artist__name','tags'))
+#     data = pd.DataFrame(Movie.objects.all().values('id','name', 'description','industry__name','certification','genre__name','artist__name','tags'))
 
 
 
-    data['all_fields'] = data['description']+' '+data['industry__name']+' '+data['certification']+' '+data['genre__name']+' '+data['artist__name']+' '+data['tags']
+#     data['all_fields'] = data['description']+' '+data['industry__name']+' '+data['certification']+' '+data['genre__name']+' '+data['artist__name']+' '+data['tags']
     
-    data.drop(columns=['description','industry__name','certification','genre__name','artist__name','tags'],inplace=True)
+#     data.drop(columns=['description','industry__name','certification','genre__name','artist__name','tags'],inplace=True)
 
 
-    tfidf_vectorizer = TfidfVectorizer(max_features=200, stop_words='english')
+#     tfidf_vectorizer = TfidfVectorizer(max_features=200, stop_words='english')
 
-    vector = tfidf_vectorizer.fit_transform(data['all_fields']).toarray()
+#     vector = tfidf_vectorizer.fit_transform(data['all_fields']).toarray()
 
-    name = movie.name
+#     name = movie.name
     
-    similiarity=cosine_similarity(vector)
+#     similiarity=cosine_similarity(vector)
 
-    my_movie_id=data[data['name']==name].index[0]
+#     my_movie_id=data[data['name']==name].index[0]
 
-    distance=sorted(list(enumerate(similiarity[my_movie_id])),reverse=True,key=lambda vector:vector[1])
+#     distance=sorted(list(enumerate(similiarity[my_movie_id])),reverse=True,key=lambda vector:vector[1])
 
-    recommended_movies_ids=[]
+#     recommended_movies_ids=[]
 
-    for i in distance[0:10]:
+#     for i in distance[0:10]:
 
-        similarity_score = i[1]
+#         similarity_score = i[1]
 
-        ids = data.iloc[i[0]].id
+#         ids = data.iloc[i[0]].id
 
-        if similarity_score > 0.1 and ids!=movie.id:
+#         if similarity_score > 0.1 and ids!=movie.id:
 
-            recommended_movies_ids.append(ids)
+#             recommended_movies_ids.append(ids)
 
-    recommended_movies = Movie.objects.filter(id__in=recommended_movies_ids)
+#     recommended_movies = Movie.objects.filter(id__in=recommended_movies_ids)
 
-    return recommended_movies
+#     return recommended_movies
