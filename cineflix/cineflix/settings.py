@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'cineflix.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': config('DB_ENGINE'),
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST':'localhost',
+        'HOST':config('DB_HOST'),
         'PORT':'3306',
     }
 }
